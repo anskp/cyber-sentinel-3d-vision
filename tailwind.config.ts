@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,16 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				cyber: {
+					dark: '#0f1729',
+					darker: '#070c16',
+					blue: '#4361ee',
+					'blue-light': '#4cc9f0',
+					green: '#4cc38a',
+					red: '#f87171',
+					orange: '#fb923c',
+					purple: '#8b5cf6',
 				}
 			},
 			borderRadius: {
@@ -84,12 +95,44 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+				'pulse-glow': {
+					'0%, 100%': {
+						opacity: '1',
+						transform: 'scale(1)',
+					},
+					'50%': {
+						opacity: '0.8',
+						transform: 'scale(1.05)',
+					},
+				},
+				'scan-line': {
+					'0%': {
+						transform: 'translateY(0%)'
+					},
+					'100%': {
+						transform: 'translateY(100%)'
+					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0)',
+					},
+					'50%': {
+						transform: 'translateY(-10px)',
+					},
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-glow': 'pulse-glow 2s infinite ease-in-out',
+				'scan-line': 'scan-line 2s linear infinite',
+				'float': 'float 5s ease-in-out infinite',
+			},
+			fontFamily: {
+				mono: ['JetBrains Mono', 'monospace'],
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
