@@ -8,8 +8,18 @@ import VulnerabilityTable from '@/components/VulnerabilityTable';
 import { toast } from '@/components/ui/use-toast';
 import { AlertTriangle, Info } from 'lucide-react';
 
+// Define the vulnerability type
+interface Vulnerability {
+  id: string;
+  name: string;
+  severity: 'critical' | 'high' | 'medium' | 'low';
+  status: 'open' | 'mitigated';
+  description?: string;
+  detectedOn?: string;
+}
+
 // Mock data
-const MOCK_VULNERABILITIES = [
+const MOCK_VULNERABILITIES: Vulnerability[] = [
   {
     id: '1',
     name: 'CVE-2023-1234: OpenSSL Vulnerability',
@@ -50,13 +60,13 @@ const MOCK_VULNERABILITIES = [
     description: 'Web server is missing recommended security headers.',
     detectedOn: '2025-04-17',
   },
-] as const;
+];
 
 const Dashboard = () => {
   const [isScanning, setIsScanning] = useState(false);
   const [scanProgress, setScanProgress] = useState(0);
   const [threatLevel, setThreatLevel] = useState<'low' | 'medium' | 'high' | 'none'>('none');
-  const [vulnerabilities, setVulnerabilities] = useState<typeof MOCK_VULNERABILITIES>([]);
+  const [vulnerabilities, setVulnerabilities] = useState<Vulnerability[]>([]);
   const [lastScanTime, setLastScanTime] = useState<string>('Never');
   const [systemsScanned, setSystemsScanned] = useState(0);
   
@@ -126,7 +136,6 @@ const Dashboard = () => {
           setVulnerabilities(prev => [...prev, MOCK_VULNERABILITIES[1]]);
           
           toast({
-            icon: <AlertTriangle className="h-4 w-4 text-cyber-red" />,
             title: "High severity issue found!",
             description: "SQL Injection vulnerability detected",
             duration: 6000,
@@ -139,7 +148,6 @@ const Dashboard = () => {
           setVulnerabilities(prev => [...prev, MOCK_VULNERABILITIES[0]]);
           
           toast({
-            icon: <AlertTriangle className="h-4 w-4 text-cyber-red" />,
             title: "CRITICAL vulnerability found!",
             description: "OpenSSL Vulnerability detected - Immediate action required",
             duration: 8000,
@@ -154,7 +162,6 @@ const Dashboard = () => {
           setSystemsScanned(prev => prev + 1);
           
           toast({
-            icon: <Info className="h-4 w-4 text-cyber-blue" />,
             title: "Scan completed",
             description: `Found ${vulnerabilities.length} vulnerabilities. Generating report...`,
             duration: 5000,

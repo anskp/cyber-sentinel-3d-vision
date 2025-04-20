@@ -107,12 +107,11 @@ const SecurityMetrics = ({
               </div>
               <Progress 
                 value={securityScore} 
-                className="h-2 bg-cyber-dark"
-                indicatorClassName={
+                className={`h-2 bg-cyber-dark ${
                   securityScore >= 80 ? "bg-cyber-green" : 
                   securityScore >= 50 ? "bg-cyber-orange" : 
                   "bg-cyber-red"
-                }
+                }`}
               />
             </div>
             
